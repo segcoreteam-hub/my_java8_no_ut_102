@@ -9,9 +9,28 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <build>
+        <plugins>
+            <!--
+              maven-compiler-plugin 3.11.0 is used deliberately: the installed Maven is 3.8.4,
+              so 3.13.0+ (which requires Maven 3.9.0+) cannot be used, and 3.0.5 predates Java 9
+              and cannot emit Java 25 bytecode. 3.11.0 is the lowest version that works with
+              Maven 3.6.0-3.8.x while supporting <release>25</release>.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>25</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
